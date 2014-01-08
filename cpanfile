@@ -1,4 +1,5 @@
 requires "IO::Socket::IP" => "0";
+requires "Module::Metadata" => "0";
 requires "Socket" => "0";
 requires "base" => "0";
 requires "perl" => "5.006";
@@ -22,7 +23,7 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
-  requires "Dist::Zilla" => "5.008";
+  requires "Dist::Zilla" => "5.009";
   requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.055";
   requires "File::Spec" => "0";
   requires "File::Temp" => "0";

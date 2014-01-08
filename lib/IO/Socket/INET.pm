@@ -15,7 +15,11 @@ BEGIN {
     if ( $INC{"IO/Socket.pm"} && !defined $IO::Socket::VERSION ) {
         require Module::Metadata;
         my $mm = Module::Metadata->new_from_file( $INC{"IO/Socket.pm"} );
-        $IO::Socket::VERSION = $mm->version("IO::Socket");
+        #<<< No perltidy
+        $IO::Socket::VERSION    # hide from Module::Metadata itself
+            = $mm->version("IO::Socket");
+        #>>>
+
     }
 }
 
