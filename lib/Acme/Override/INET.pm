@@ -9,7 +9,11 @@ package Acme::Override::INET;
 
 =for Pod::Coverage BUILD
 
-=head1 B<WARNING>: This may break your system
+=begin :prelude
+
+B<WARNING>: This may break your system
+
+=end :prelude
 
 =head1 DESCRIPTION
 
