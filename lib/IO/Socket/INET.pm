@@ -8,6 +8,17 @@ package
 
 our $VERSION = 1.34;
 
+# $IO::Socket::VERSION is set too late in a circular load,
+# so we cheat and find it without loading
+#
+BEGIN {
+    if ( $INC{"IO/Socket.pm"} && !defined $IO::Socket::VERSION ) {
+        require Module::Metadata;
+        my $mm = Module::Metadata->new_from_file( $INC{"IO/Socket.pm"} );
+        $IO::Socket::VERSION = $mm->version("IO::Socket");
+    }
+}
+
 use IO::Socket::IP -register;
 use base qw( IO::Socket::IP );
 use Socket qw( PF_INET );
@@ -19,3 +30,9 @@ sub new {
 }
 
 1;
+
+=head1 DESCRIPTION
+
+This is a fake IO::Socket::INET as installed via Acme::Override::INET.
+
+=cut
