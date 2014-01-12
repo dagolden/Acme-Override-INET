@@ -1,4 +1,4 @@
-requires "IO::Socket::IP" => "0";
+requires "IO::Socket::IP" => "0.25";
 requires "Module::Metadata" => "0";
 requires "Socket" => "0";
 requires "base" => "0";

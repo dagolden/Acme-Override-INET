@@ -23,7 +23,7 @@ BEGIN {
     }
 }
 
-use IO::Socket::IP -register;
+use IO::Socket::IP 0.25 -register;
 use base qw( IO::Socket::IP );
 use Socket qw( PF_INET );
 
