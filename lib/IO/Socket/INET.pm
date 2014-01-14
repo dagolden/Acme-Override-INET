@@ -39,6 +39,8 @@ use IO::Socket::IP 0.25 -register;
 use base qw( IO::Socket::IP );
 use Socket qw( PF_INET );
 
+no warnings 'redefine'; # new defined twice due to circular load
+
 sub new {
     my $class = shift;
     return $class->SUPER::new( Family => PF_INET, PeerAddr => shift ) if @_ == 1;
