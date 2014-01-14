@@ -27,6 +27,11 @@ BEGIN {
     }
 }
 
+# Flag use of this module during testing
+BEGIN {
+    if ( $ENV{HARNESS_ACTIVE} && $INC{"Test/Builder.pm"} ) {
+        Test::Builder->new->diag(
+            "Acme::Override::INET replaced IO::Socket::INET with IO::Socket::IP");
     }
 }
 
