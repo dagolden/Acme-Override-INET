@@ -10,17 +10,22 @@ package
 
 our $VERSION = 1.34;
 
-# $IO::Socket::VERSION is set too late in a circular load,
-# so we cheat and find it without loading
+# some $VERSIONs are set too late during circular loading,
+# so we cheat and find them without loading
 #
 BEGIN {
-    if ( $INC{"IO/Socket.pm"} && !defined $IO::Socket::VERSION ) {
-        require Module::Metadata;
-        my $mm = Module::Metadata->new_from_file( $INC{"IO/Socket.pm"} );
-        #<<< No perltidy
-        $IO::Socket::VERSION    # hide from Module::Metadata itself
-            = $mm->version("IO::Socket");
-        #>>>
+    no strict 'refs';
+    for my $mod (qw/IO::Socket IO::Socket::IP/) {
+        ( my $file = $mod ) =~ s{::}{/}g;
+        $file .= ".pm";
+        if ( $INC{$file} && !defined ${"${mod}::VERSION"} ) {
+            require Module::Metadata;
+            my $mm = Module::Metadata->new_from_file( $INC{$file} );
+            ${"${mod}::VERSION"} = $mm->version($mod);
+
+        }
+    }
+}
 
     }
 }
